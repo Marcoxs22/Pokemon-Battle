@@ -133,7 +133,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Armature|pm0145_00_31_ba21_tokusyu01|Base Layer
+      name: BirdAttack2
       takeName: Armature|Armature|pm0145_00_31_ba21_tokusyu01|Base Layer
       internalID: -505209055983003120
       firstFrame: 0
