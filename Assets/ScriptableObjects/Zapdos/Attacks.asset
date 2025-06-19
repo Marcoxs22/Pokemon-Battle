@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Attacks
   m_EditorClassIdentifier: 
   attacks:
-  - minDamage: 0
-    maxDamage: 0
-    attackTime: 0
+  - minDamage: 50
+    maxDamage: 100
+    attackTime: 2
     animationName: BirdAttack
-    soundName: ZapdosAppear
+    soundName: ZapdosAttack
     particlesPrefab: {fileID: 0}
-  - minDamage: 0
-    maxDamage: 0
-    attackTime: 0
+  - minDamage: 50
+    maxDamage: 100
+    attackTime: 2
     animationName: BirdAttack2
-    soundName: ZapdosAppear
+    soundName: ZapdosAttack2
     particlesPrefab: {fileID: 0}

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Attacks
   m_EditorClassIdentifier: 
   attacks:
-  - minDamage: 0
-    maxDamage: 0
-    attackTime: 0
+  - minDamage: 50
+    maxDamage: 100
+    attackTime: 2
     animationName: WolfAttack
-    soundName: ArcanineAppear
+    soundName: ArcanineAttack
     particlesPrefab: {fileID: 0}
