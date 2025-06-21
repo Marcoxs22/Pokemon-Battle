@@ -13,15 +13,23 @@ MonoBehaviour:
   m_Name: Attacks
   m_EditorClassIdentifier: 
   attacks:
-  - minDamage: 50
+  - attackName: IceAttack
+    minDamage: 50
     maxDamage: 100
     attackTime: 2
     animationName: BirdAttack
     soundName: ZapdosAttack
-    particlesPrefab: {fileID: 0}
-  - minDamage: 50
+    hitParticlesPrefab: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753,
+      type: 3}
+    particlesPrefab: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b,
+      type: 3}
+  - attackName: PoofAttack
+    minDamage: 50
     maxDamage: 100
     attackTime: 2
     animationName: BirdAttack2
     soundName: ZapdosAttack2
-    particlesPrefab: {fileID: 0}
+    hitParticlesPrefab: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
+      type: 3}
+    particlesPrefab: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b,
+      type: 3}
