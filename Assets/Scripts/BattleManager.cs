@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
-
+using Unity.VisualScripting;
+using NUnit.Framework;
+using UnityEditor.VersionControl;
 
 
 public class BattleManager : MonoBehaviour
@@ -10,7 +12,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private int _numberOfFighters = 2;
     [SerializeField]
-    private UnityEvent _onFightersReady;
+    private UnityEvent _onBattleStopped;
     [SerializeField]
     private UnityEvent _onBattleFinished;
     [SerializeField]
@@ -19,21 +21,29 @@ public class BattleManager : MonoBehaviour
     private Coroutine _battleCoroutine;
     private DamageTarget _damageTarget = new DamageTarget();
 
+
     public void AddFighter(Fighter fighter)
     {
+        MessageFrame.Instance.ShowMessage($"{fighter.Name} has joined the battle!");
         _fighters.Add(fighter);
         CheckFighters();
     }
 
+
     public void RemoveFighter(Fighter fighter)
     {
         _fighters.Remove(fighter);
-        if (_battleCoroutine != null)
+        if (_fighters.Count < 2)
         {
-            StopCoroutine(_battleCoroutine);
-            _battleCoroutine = null;
+            if (_battleCoroutine != null)
+            {
+                StopCoroutine(_battleCoroutine);
+                _battleCoroutine = null;
+            }
+            _onBattleStopped?.Invoke();
         }
     }
+
 
     private void CheckFighters()
     {
@@ -41,9 +51,9 @@ public class BattleManager : MonoBehaviour
         {
             return;
         }
-        _onFightersReady?.Invoke();
-        StartBattle();
+        _onBattleStarted?.Invoke();
     }
+
 
     public void StartBattle()
     {
@@ -54,9 +64,9 @@ public class BattleManager : MonoBehaviour
         _battleCoroutine = StartCoroutine(BattleCoroutine());
     }
 
+
     private IEnumerator BattleCoroutine()
     {
-        _onBattleStarted?.Invoke();
         while (_fighters.Count > 1)
         {
             Fighter attacker = _fighters[Random.Range(0, _fighters.Count)];
@@ -68,14 +78,15 @@ public class BattleManager : MonoBehaviour
             attacker.transform.LookAt(defender.transform);
             defender.transform.LookAt(attacker.transform);
             Attack attack = attacker.Attacks.GetRandomAttack();
+            MessageFrame.Instance.ShowMessage($"{attacker.Name} attacks with {attack.attackName}!");
             SoundManager.instance.Play(attack.soundName);
             attacker.CharacterAnimator.Play(attack.animationName);
-            GameObject attackParticles = Instantiate(attack.particlesPrefab, attacker.transform.position, Quaternion.identity);
+            GameObject attackParticles = Instantiate(attack.particlesPrefab, defender.transform.position, Quaternion.identity);
             attackParticles.transform.SetParent(attacker.transform);
             yield return new WaitForSeconds(attack.attackTime);
             float damage = Random.Range(attack.minDamage, attack.maxDamage);
-            GameObject defendParticles = Instantiate(attack.hitParticlesPrefab, defender.transform.position, Quaternion.identity);
-            defendParticles.transform.SetParent(defender.transform);
+            GameObject defenderParticles = Instantiate(attack.hitParticlesPrefab, defender.transform.position, Quaternion.identity);
+            defenderParticles.transform.SetParent(defender.transform);
             _damageTarget.SetDamageTarget(damage, defender.transform);
             defender.Health.TakeDamage(_damageTarget);
             if (defender.Health.CurrentHealth <= 0)
@@ -84,6 +95,14 @@ public class BattleManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1f);
         }
+        EndBattle(_fighters[0]);
+    }
+    private void EndBattle(Fighter winner)
+    {
+        winner.transform.LookAt(Camera.main.transform);
+        MessageFrame.Instance.ShowMessage($"{winner.Name}wins the battle!");
+        SoundManager.instance.Play(winner.WinSoundName);
+        winner.CharacterAnimator.Play(winner.WinAnimationName);
         _onBattleFinished?.Invoke();
     }
 }
