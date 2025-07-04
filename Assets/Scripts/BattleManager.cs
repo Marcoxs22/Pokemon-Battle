@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using System.Collections;
 using Unity.VisualScripting;
 using NUnit.Framework;
-using UnityEditor.VersionControl;
+
 
 
 public class BattleManager : MonoBehaviour
@@ -17,6 +17,10 @@ public class BattleManager : MonoBehaviour
     private UnityEvent _onBattleFinished;
     [SerializeField]
     private UnityEvent _onBattleStarted;
+    [SerializeField]
+    private UnityEvent _OnFighterFound;
+    [SerializeField]
+    private UnityEvent _NonFighterFound;
     private List<Fighter> _fighters = new List<Fighter>();
     private Coroutine _battleCoroutine;
     private DamageTarget _damageTarget = new DamageTarget();
@@ -24,6 +28,7 @@ public class BattleManager : MonoBehaviour
 
     public void AddFighter(Fighter fighter)
     {
+        _OnFighterFound.Invoke();
         MessageFrame.Instance.ShowMessage($"{fighter.Name} has joined the battle!");
         _fighters.Add(fighter);
         CheckFighters();
@@ -41,6 +46,10 @@ public class BattleManager : MonoBehaviour
                 _battleCoroutine = null;
             }
             _onBattleStopped?.Invoke();
+            if (_fighters.Count < 2)
+            {
+                _NonFighterFound.Invoke();
+            }
         }
     }
 
@@ -81,7 +90,7 @@ public class BattleManager : MonoBehaviour
             MessageFrame.Instance.ShowMessage($"{attacker.Name} attacks with {attack.attackName}!");
             SoundManager.instance.Play(attack.soundName);
             attacker.CharacterAnimator.Play(attack.animationName);
-            GameObject attackParticles = Instantiate(attack.particlesPrefab, defender.transform.position, Quaternion.identity);
+            GameObject attackParticles = Instantiate(attack.particlesPrefab, attacker.transform.position, Quaternion.identity);
             attackParticles.transform.SetParent(attacker.transform);
             yield return new WaitForSeconds(attack.attackTime);
             float damage = Random.Range(attack.minDamage, attack.maxDamage);

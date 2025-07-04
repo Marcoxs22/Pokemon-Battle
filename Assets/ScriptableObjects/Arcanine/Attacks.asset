@@ -21,5 +21,5 @@ MonoBehaviour:
     soundName: ArcanineAttack
     hitParticlesPrefab: {fileID: 2353600328335836179, guid: ceec7516237b4104b94300043ca39784,
       type: 3}
-    particlesPrefab: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b,
+    particlesPrefab: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6,
       type: 3}

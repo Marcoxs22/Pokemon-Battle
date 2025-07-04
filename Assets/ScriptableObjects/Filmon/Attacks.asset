@@ -21,7 +21,7 @@ MonoBehaviour:
     soundName: FilmonAttack
     hitParticlesPrefab: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753,
       type: 3}
-    particlesPrefab: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b,
+    particlesPrefab: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6,
       type: 3}
   - attackName: Roar Attack
     minDamage: 50
@@ -31,5 +31,5 @@ MonoBehaviour:
     soundName: FilmonAttack2
     hitParticlesPrefab: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e,
       type: 3}
-    particlesPrefab: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b,
+    particlesPrefab: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6,
       type: 3}

@@ -1,0 +1,1 @@
+C:\Users\Equipo 30\Documents\Unity\PokemonBattle_MarcoContreras\Pokemon Battle\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\384i1b60\obj\arm64-v8a
