@@ -292,7 +292,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: FilmonHit2
+      name: FilmonDamage
       takeName: chr636_bd01_rd
       internalID: 3454356671832074900
       firstFrame: 0
